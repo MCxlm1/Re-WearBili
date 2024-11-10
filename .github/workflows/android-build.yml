@@ -1,6 +1,7 @@
 name: Build Re:WearBili
 
 on:
+  workflow_dispatch:
   push:
     branches: [ "main" ]
   pull_request:
