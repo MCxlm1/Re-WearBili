@@ -25,9 +25,10 @@ jobs:
       run: chmod +x gradlew
     - name: Clone Submodules
       run: git submodule update --init --recursive
-    - name: Build with Gradle
-      run: ./gradlew :app:assembleRelease
-       - uses: ilharp/sign-android-release@nightly # Or use @nightly
+     - name: Build with Gradle
+      run: |
+          ./gradlew :app:assembleRelease
+    - uses: ilharp/sign-android-release@nightly # Or use @nightly
       name: Sign app APK
       id: sign_app
       with:
