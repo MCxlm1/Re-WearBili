@@ -26,7 +26,17 @@ jobs:
     - name: Clone Submodules
       run: git submodule update --init --recursive
     - name: Build with Gradle
-      run: ./gradlew assembleDebug
+      run: ./gradlew :app:assembleRelease
+       - uses: ilharp/sign-android-release@nightly # Or use @nightly
+      name: Sign app APK
+      id: sign_app
+      with:
+        releaseDir: app/build/outputs/apk/release
+        signingKey: ${{ secrets.KEY_STORE }}
+        keyAlias: ${{ secrets.ALIAS_NAME }}
+        keyStorePassword: ${{ secrets.KEY_PASSWORD }}
+        keyPassword: ${{ secrets.ALIAS_PASSWORD }}
+        buildToolsVersion: 30.0.3
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
